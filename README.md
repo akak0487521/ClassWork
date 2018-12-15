@@ -15,5 +15,3 @@
 ![My trophy card2](https://card.psnprofiles.com/2/akak0487521.png)
 
 [link](https://psnprofiles.com/)
-
-:fu: :fu: :fu: :fu: :fu:
