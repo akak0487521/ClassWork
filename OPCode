@@ -1,0 +1,24 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class OPCode {
+    public static void main(String args[]){
+	Scanner string = new Scanner(System.in);
+        try {
+ 	PrintWriter output = new PrintWriter(new FileOutputStream("opFile.txt", true));
+        String line = string.nextLine();
+	String buffer = "               ";
+	StringTokenizer space = new StringTokenizer(line, " ");
+	String operation = space.nextToken();
+	String format = space.nextToken();
+	String opCode = space.nextToken(); 
+	output.println(operation + buffer.substring(operation.length(), 8) + format + buffer.substring(format.length(), 3) + opCode);
+	output.close();    
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found");
+	    System.exit(0);
+        }
+        
+    }
+}
