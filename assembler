@@ -4,14 +4,21 @@ import java.util.*;
 
 public class FileReadDemo {
     public static void main(String args[]){
-        FileReader fileReader;
+        FileReader fileReader1;
+        FileReader fileReader2;
         try {
-            fileReader = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式");
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            while (bufferedReader.ready()){
-                System.out.println(bufferedReader.readLine());
+            fileReader1 = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式"); //Figure專用reader
+            fileReader2 = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式"); //op file 專用reader
+            BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
+            BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
+            while (bufferedReader1.ready()){
+                System.out.println(bufferedReader1.readLine());
             }
-            fileReader.close();
+            fileReader1.close();
+            while (bufferedReader2.ready()){
+                System.out.println(bufferedReader2.readLine());
+            }
+            fileReader2.close();
         } catch (Exception e) {
             System.out.println(e);
         }
