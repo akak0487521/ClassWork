@@ -1,0 +1,20 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class FileReadDemo {
+    public static void main(String args[]){
+        FileReader fileReader;
+        try {
+            fileReader = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            while (bufferedReader.ready()){
+                System.out.println(bufferedReader.readLine());
+            }
+            fileReader.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+    }
+}
