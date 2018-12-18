@@ -1,14 +1,13 @@
-import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class FileReadDemo {
+public class assembler {
     public static void main(String args[]){
         FileReader fileReader1;
         FileReader fileReader2;
         try {
-            fileReader1 = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式"); //Figure 專用reader
-            fileReader2 = new FileReader("C:\Users\user\Downloads\期末專題評分說明\系統程式"); //op file 專用reader
+            fileReader1 = new FileReader("C:\\Users\\user\\Downloads\\期末專題評分說明\\系統程式\\Figure2.1.txt"); //Figure 專用reader
+            fileReader2 = new FileReader("C:\\Users\\user\\Downloads\\期末專題評分說明\\系統程式\\Figure2.1.txt"); //op file 專用reader
             BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
             BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
             while (bufferedReader1.ready()){
