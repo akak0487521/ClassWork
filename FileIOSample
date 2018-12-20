@@ -1,0 +1,27 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class FileReadDemo {
+    public static void main(String args[]){
+        FileReader fileReader1;
+        FileReader fileReader2;
+        try {
+            fileReader1 = new FileReader("C:\Users\user\Desktop\Figure2.1.txt"); //Figure 專用reader
+            fileReader2 = new FileReader("C:\Users\user\Desktop\opFile.txt"); //op file 專用reader
+            BufferedReader bufferedReader1 = new BufferedReader(fileReader1);
+            BufferedReader bufferedReader2 = new BufferedReader(fileReader2);
+            while (bufferedReader1.ready()){
+                System.out.println(bufferedReader1.readLine());
+            }
+            fileReader1.close();
+            while (bufferedReader2.ready()){
+                System.out.println(bufferedReader2.readLine());
+            }
+            fileReader2.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+    }
+}
