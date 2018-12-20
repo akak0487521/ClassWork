@@ -7,5 +7,22 @@ public class LibraryManagement
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
+		String Account = input.nextLine();
+		String Password = input.nextLine();
+		try
+		{
+			if(Account.equals("cis") == false)
+				{throw new Exception("Not correct account");}
+			else if((Password.equals("1234") == false))
+				{throw new Exception("Not correct password");}
+		}
+		catch(Exception e)
+		{
+		String ErrorMessage = e.getMessage();
+		System.out.println(ErrorMessage);
+		System.exit(0);
+		}
+		System.out.println("Log in success.")
+		System.out.println("Start managing the library.")
 		
 		
