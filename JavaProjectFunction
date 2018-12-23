@@ -1,12 +1,21 @@
-import java.
-import
-import
+import java.io *;
+import java.lang.*;
+import java.util.*;
 
 public class LibraryManagement
 {
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
+		try
+		{
+			FileReader Library = new FileReader("Library.txt");
+		}	
+		catch (FileNotFoundException e) 
+		{
+  	   	       System.out.println("FileNotFound");
+     		       System.exit(0)
+		}
 		String Account = input.nextLine();
 		String Password = input.nextLine();
 		try
@@ -24,5 +33,10 @@ public class LibraryManagement
 		}
 		System.out.println("Log in success.")
 		System.out.println("Start managing the library.")
+		System.out.println("Please input an operation.")
+		try
+		{
+		
+		
 		
 		
