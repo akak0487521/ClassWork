@@ -11,12 +11,13 @@ public class Book implements Serializable
 	private String publisher;
 	private String Code;
 	private String Genre;
-	private String Year;
+	private int Year;
 	
-	public Book(String a, String b, String c,String d, String e, String f)
+	public Book(String a, String b, String c,String d, String e,int f)
 	{
-		bookName = a;
-		auther = b;
-		publisher = c;
-                
+		setBook(a, b, c, d, e, f);
+	}
+	public setBook(String a, String b, String c,String d, String e,int f)
+        {
+		
 }
