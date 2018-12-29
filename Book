@@ -5,20 +5,58 @@ import java.util.*;
 public class Book implements Serializable 
 {
 	private int bookPlace;
-	private final int BookShell = 128;
+	private static final int BookShell = 128;
 	private String bookName;
 	private String auther;
 	private String publisher;
 	private String Code;
 	private String Genre;
 	private String Year;
+	private final String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	public Book(String abookName, String anauther, String apublisher,String aCode, String aGenre,String aYear)
 	{
 		setBook(abookName, anauther, apublisher, aCode,aGenre, aYear);
 	}
-	public setBook(String Name, String Auther, String Publisher,String bcode, String bGenre,int bYear)
+	public void setBook(String Name, String Auther, String Publisher,String bcode, String bGenre,String bYear)
         {
-		if(bcode.charAt(0).is)
-		
+		bcodeFirstWord = bcode.charAt(0).toUpperCase();
+		if(bcodeFirstWord.IndexOf(alpha) >= 0 && bcode.subString(1).isDigits() == true && bYear.isDigits() == true)
+		{
+			bookName = Name;
+			auther = Auther;
+			publisher = Publisher;
+			Code = bcode;
+			Genre = bGenre;
+			Year = bYear;
+		}
+		else
+		{
+			System.out.println("Wrong data inserted.")
+		}
+	}
+	public void getBookName()
+	{
+		return bookName;
+	}
+	public void getAuther()
+	{
+		return auther;
+	}
+	public void getPublisher()
+	{
+		return publisher;
+	}
+	public void getCode()
+	{
+		return 
+	}
+	public void getGenre()
+	{
+	
+	}
+	public void getYear()
+	{
+	
+	}
 }
