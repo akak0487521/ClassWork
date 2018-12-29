@@ -7,9 +7,9 @@ public class Book implements Serializable
 	private String bookName;
 	private String auther;
 	private String publisher;
-	private String Code;
+	private String Code [6];
 	private String Genre;
-	private String Year;
+	private String Year [4];
 	private final String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	public Book(String abookName, String anauther, String apublisher,String aCode, String aGenre,String aYear)
@@ -33,27 +33,27 @@ public class Book implements Serializable
 			System.out.println("Wrong data inserted.")
 		}
 	}
-	public void getBookName()
+	public String getBookName()
 	{
 		return bookName;
 	}
-	public void getAuther()
+	public String getAuther()
 	{
 		return auther;
 	}
-	public void getPublisher()
+	public String getPublisher()
 	{
 		return publisher;
 	}
-	public void getCode()
+	public String getCode()
 	{
 		return Code;
 	}
-	public void getGenre()
+	public String getGenre()
 	{
 		return Genre;
 	}
-	public void getYear()
+	public String getYear()
 	{
 		return Year;
 	}
