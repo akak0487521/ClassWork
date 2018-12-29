@@ -57,4 +57,9 @@ public class Book implements Serializable
 	{
 		return Year;
 	}
+	public String toString()
+	{
+		String tab = "/t";
+		return bookName + tab + auther + tab + publisher + tab + Code + tab + Genre + tab + Year;
+	}
 }
