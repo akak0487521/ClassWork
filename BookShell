@@ -8,17 +8,66 @@ public class BookShell extends Book implements Serializable
 	public BookShell()
         {
                 Book [] newBookShell = new Book [128];
+		private int currentBooks = 0;
         }
         public void menu()
         {
-		this.login();
+		if(login())
+		{
+		System.out.println("Log in success.");
+		System.out.println("Start managing the library.");
+		System.out.println("Please input an operation. If you forgot the operations, please type instruction for detials.");
+		String operation = keyboard.nextLine();
+		try
+		{
+			if(operation.equals("append")){Append();}
+			else if(operation.equals("delete")){Delete();}
+			else if(operation.equals("print")){Print();}
+			else if(operation.equals("search")){Search();}
+			else if(operation.equals("instruction")){Instruction();}
+			else throw new NotAnOperationException();
+		}
+		catch(NotAnOperationException e)
+		{
+			System.out.println("Not an operation or incorrect typing.");
+		}
+		
 		
         }
+	
+		public void Append() //新增一筆資料 
+	{ 
+		System.out.println("Please enter the book name.");
+		String InputBookName = keyboard.nextLine();
+		System.out.println("Please enter the author name.");
+		String InputAuthor = keyboard.nextLine();
+		System.out.println("Please enter the publisher's name.");
+		String InputPublisher = keyboard.nextLine();
+		System.out.println("Please enter the book code.");
+		String InputCode = keyboard.nextLine();
+		System.out.println("Please enter the genre of the book.");
+		String InputGenre = keyboard.nextLine();
+		System.out.println("Please enter the year of publishing.");
+		String InputYear = keyboard.nextLine();
+		newBookShell [currentBooks] = new book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+		currentBooks++; //現存書籍數量+1
+	}
+	public void Instruction()
+	{
+		System.out.println("-append: append a book into the shell.");
+		System.out.println("-delete: delete a book from the shell.");
+		System.out.println(" -print: print all the books in the shell.");
+		System.out.println("-search: search a book in the shell with the code.");
+		menu();
+	}
         public Boolean login()
         {
 		String Account = "cis";
 		String Password = "1234";
-		System.out.println("")
-		
+		System.out.print("Account:")
+		String InputAccount = keyboard.nextLine();
+		System.out.print("Password:")
+		String InputPassword = keyboard.nextLine();
+		return (InputAccount.equals(Account)&&InputPassword.equals(Password));
         }
 }
