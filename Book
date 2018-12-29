@@ -49,14 +49,14 @@ public class Book implements Serializable
 	}
 	public void getCode()
 	{
-		return 
+		return Code;
 	}
 	public void getGenre()
 	{
-	
+		return Genre;
 	}
 	public void getYear()
 	{
-	
+		return Year;
 	}
 }
