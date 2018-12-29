@@ -31,11 +31,16 @@ public class BookShell extends Book implements Serializable
 		{
 			System.out.println("Not an operation or incorrect typing.");
 		}
+		finally
+		{
 		
-		
+		}
+		System.out.println("Library managing process is ended.");
+		System.out.println("Thank you for using.");
+		System.exit(0);
         }
 	
-		public void Append() //新增一筆資料 
+	public void Append() //新增一筆資料 
 	{ 
 		System.out.println("Please enter the book name.");
 		String InputBookName = keyboard.nextLine();
@@ -51,8 +56,14 @@ public class BookShell extends Book implements Serializable
 		String InputYear = keyboard.nextLine();
 		newBookShell [currentBooks] = new book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
 		currentBooks++; //現存書籍數量+1
+		menu();
 	}
-	public void Instruction()
+	public void
+	public void Print()
+	{
+		while()
+	}
+	public void Instruction()  //查詢指令表
 	{
 		System.out.println("-append: append a book into the shell.");
 		System.out.println("-delete: delete a book from the shell.");
@@ -60,7 +71,7 @@ public class BookShell extends Book implements Serializable
 		System.out.println("-search: search a book in the shell with the code.");
 		menu();
 	}
-        public Boolean login()
+        public Boolean login() //確定登入資料
         {
 		String Account = "cis";
 		String Password = "1234";
