@@ -12,6 +12,24 @@ public class Book implements Serializable
 	private String Year [4];
 	private final String alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
+	public Book()
+	{
+		bookName = null;
+		auther = null;
+		publisher = null;
+		Code = null;
+		Genre = null;
+		Year = null;
+	}
+	public Book(Book BookSwitched)
+	{
+		bookName = BookSwitched.getBookName();
+		auther = BookSwitched.getAuther();
+		publisher = BookSwitched.getPublisher();
+		Code = BookSwitched.getCode();
+		Genre = BookSwitched.getGenre();
+		Year = BookSwitched.getYear();
+	}
 	public Book(String abookName, String anauther, String apublisher,String aCode, String aGenre,String aYear)
 	{
 		setBook(abookName, anauther, apublisher, aCode,aGenre, aYear);
