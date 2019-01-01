@@ -26,13 +26,13 @@ public class BookShell extends Book implements Serializable
 		System.out.println("Start managing the library.");
 		System.out.println("Please input an operation. If you forgot the operations, please type instruction for detials.");
 		String operation = keyboard.nextLine();
-		if(operation.equals("append")){Append();}
-		else if(operation.equals("delete")){Delete();}
-		else if(operation.equals("print")){Print();}
-		else if(operation.equals("search")){Search();}
-		else if(operation.equals("change")){Correct();}
+		if(operation.equals("append")){Append(Bookshell []);}
+		else if(operation.equals("delete")){Delete(Bookshell []);}
+		else if(operation.equals("print")){Print(Bookshell []);}
+		else if(operation.equals("search")){Search(Bookshell []);}
+		else if(operation.equals("change")){Correct(Bookshell []);}
 		else if(operation.equals("instruction")){Instruction();}
-		else if(operation.equals("exit")){Exit();}
+		else if(operation.equals("exit")){Exit(Bookshell []);}
 		else 
 		{
 			System.out.println("Not an operation or incorrect typing.");
@@ -40,7 +40,7 @@ public class BookShell extends Book implements Serializable
 		}
 	}
 
-	public void Append() //新增一筆資料 
+	public void Append(Book Bookshell []) //新增一筆資料 
 	{ 
 		if(currentBooks == MaxBookShell){System.out.println("The bookshell is full.");}
 		else
@@ -63,7 +63,7 @@ public class BookShell extends Book implements Serializable
 		menu();
 	}
 
-	public void Correct() //修改一筆資料 
+	public void Correct(Book Bookshell []) //修改一筆資料 
 	{
 		System.out.println("Please enter the book code youwant to correct.");
 		String codeToCorrect = keyboard.nextLine();
@@ -88,7 +88,7 @@ public class BookShell extends Book implements Serializable
 		}
 		menu();
 	}
-	public void Delete() //刪除一筆資料
+	public void Delete(Book Bookshell []) //刪除一筆資料
 	{
 		if(currentBooks == 0){System.out.println("The bookshell is empty.");}
 		else
@@ -108,7 +108,7 @@ public class BookShell extends Book implements Serializable
 		menu();
 		
 	}
-	public void Search()//搜尋一筆資料
+	public void Search(Book Bookshell [])//搜尋一筆資料
 	{
 		System.out.println("Please enter the book code you're looking for.");
 		String codeToSearch = keyboard.nextLine();
@@ -123,7 +123,7 @@ public class BookShell extends Book implements Serializable
 		
 		
 	}
-	public void Print()//輸出全部書籍
+	public void Print(Book Bookshell [])//輸出全部書籍
 	{
 		for(int i = 0;i < currentBooks;i++)
 		{
@@ -151,7 +151,7 @@ public class BookShell extends Book implements Serializable
 	{
 		return currentBooks;
 	}
-	public void Exit()  //結束動作
+	public void Exit(Book Bookshell [])  //結束動作
 	{
 		try
 		{
