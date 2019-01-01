@@ -2,16 +2,26 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class BookShell extends Book implements Serializable 
+public class BookShell extends Book
 {	
 	Scanner keyboard = new Scanner(System.in);
-	private Book newBook;
-	private int currentBooks;
+	private int currentBooks = 0;
 	private static final int MaxBookShell = 128;
+	private Book [] BookShellCreated;
+	private BookShell BookShellInUse = new BookShell();
 
-	public void start()//主程式
+	public BookShell()
 	{
-		Book Bookshell [] = new Book [MaxBookShell];
+		BookShellCreated = new Book [MaxBookShell];
+		for(int j = 0;j < MaxBookShell;j++)
+		{
+			BookShellCreated [j] = new Book();
+		}
+		currentBooks = 0;
+	}
+
+	public void start()//開始動作
+	{
 		System.out.print("Account:");
 		String InputAccount = keyboard.nextLine();
 		System.out.print("Password:");
@@ -26,13 +36,13 @@ public class BookShell extends Book implements Serializable
 		System.out.println("Start managing the library.");
 		System.out.println("Please input an operation. If you forgot the operations, please type instruction for detials.");
 		String operation = keyboard.nextLine();
-		if(operation.equals("append")){Append(Bookshell []);}
-		else if(operation.equals("delete")){Delete(Bookshell []);}
-		else if(operation.equals("print")){Print(Bookshell []);}
-		else if(operation.equals("search")){Search(Bookshell []);}
-		else if(operation.equals("change")){Correct(Bookshell []);}
+		if(operation.equals("append")){Append(BookShellInUse.BookShellCreated[BookShellInUse.getCurrentBooks()]);}
+		else if(operation.equals("delete")){Delete();}
+		else if(operation.equals("print")){Print();}
+		else if(operation.equals("search")){Search();}
+		else if(operation.equals("change")){Correct();}
 		else if(operation.equals("instruction")){Instruction();}
-		else if(operation.equals("exit")){Exit(Bookshell []);}
+		else if(operation.equals("exit")){Exit();}
 		else 
 		{
 			System.out.println("Not an operation or incorrect typing.");
@@ -40,7 +50,7 @@ public class BookShell extends Book implements Serializable
 		}
 	}
 
-	public void Append(Book Bookshell []) //新增一筆資料 
+	public void Append(Book  bookToPut) //新增一筆資料 
 	{ 
 		if(currentBooks == MaxBookShell){System.out.println("The bookshell is full.");}
 		else
@@ -57,19 +67,19 @@ public class BookShell extends Book implements Serializable
 			String InputGenre = keyboard.nextLine();
 			System.out.println("Please enter the year of publishing.");
 			String InputYear = keyboard.nextLine();
-			BookShell [currentBooks] = new book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+			bookToPut = new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
 			currentBooks++; //現存書籍數量+1
 		}
 		menu();
 	}
 
-	public void Correct(Book Bookshell []) //修改一筆資料 
+	public void Correct() //修改一筆資料 
 	{
 		System.out.println("Please enter the book code youwant to correct.");
 		String codeToCorrect = keyboard.nextLine();
 		for(int i = 0;i < getCurrentBooks();i++)
 		{
-			if(codeToCorrect.equals(BookShell [i].getCode()))
+			if(codeToCorrect.equals(BookShellInUse.BookShellCreated[i].getCode()))
 			{
 				System.out.println("Please enter the book name.");
 				String InputBookName = keyboard.nextLine();
@@ -83,51 +93,51 @@ public class BookShell extends Book implements Serializable
 				String InputGenre = keyboard.nextLine();
 				System.out.println("Please enter the year of publishing.");
 				String InputYear = keyboard.nextLine();
-				BookShell [i] = new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+				BookShellInUse.BookShellCreated[i]= new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
 			}
 		}
 		menu();
 	}
-	public void Delete(Book Bookshell []) //刪除一筆資料
+	public void Delete() //刪除一筆資料
 	{
 		if(currentBooks == 0){System.out.println("The bookshell is empty.");}
 		else
 		{
-			--currentBooks;
 			System.out.println("Please enter the book code to be deleted.");
 			String codeToBeDeleted = keyboard.nextLine();
 			for(int i = 0;i < getCurrentBooks();i++)
 			{
-				if(codeToBeDeleted.equals(BookShell [i].getCode()))
+				if(codeToBeDeleted.equals(BookShellInUse.BookShellCreated[i].getCode()))
 				{
-					BookShell [i] = new Book (BookShell [currentBooks]);
-					BookShell [currentBooks] = new Book();
+					--currentBooks;
+					BookShellInUse.BookShellCreated[i] = new Book (BookShellInUse.BookShellCreated[currentBooks]);
+					BookShellInUse.BookShellCreated[currentBooks] = new Book();
 				}
 			}
 		}
 		menu();
 		
 	}
-	public void Search(Book Bookshell [])//搜尋一筆資料
+	public void Search()//搜尋一筆資料
 	{
 		System.out.println("Please enter the book code you're looking for.");
 		String codeToSearch = keyboard.nextLine();
 		for(int i = 0;i < getCurrentBooks();i++)
 		{
-			if(codeToSearch.equals(BookShell [i].getCode()))
+			if(codeToSearch.equals(BookShellInUse.BookShellCreated[i].getCode()))
 			{
-				System.out.println(BookShell [i].toString);
+				System.out.println(BookShellInUse.BookShellCreated[i].toString());
 			}
 		}
 		menu();
 		
 		
 	}
-	public void Print(Book Bookshell [])//輸出全部書籍
+	public void Print()//輸出全部書籍
 	{
 		for(int i = 0;i < currentBooks;i++)
 		{
-			System.out.println(BookShell [i].toString());
+			System.out.println(BookShellInUse.BookShellCreated[i].toString());
 		}
 		menu();
 	}
@@ -151,15 +161,15 @@ public class BookShell extends Book implements Serializable
 	{
 		return currentBooks;
 	}
-	public void Exit(Book Bookshell [])  //結束動作
+	public void Exit()  //結束動作
 	{
 		try
 		{
 			System.out.print("Books writing into the file.");
-			PrintWriter outputStream = new PrintWriter(new FileOutPutStream("BookShell.txt"));
+			PrintWriter outputStream = new PrintWriter(new FileOutputStream("BookShell.txt"));
 			for(int i = 0;i < currentBooks;i++)
 			{
-				outputStream.println(BookShell [i].toString());
+				outputStream.println(BookShellInUse.BookShellCreated[i].toString());
 			}
 			outputStream.close();
 			System.out.print("Books are wrote into the file.");
@@ -170,10 +180,6 @@ public class BookShell extends Book implements Serializable
 		{
 			System.out.println("File not found.");
 			File file = new File("BookShell.txt");
-		}
-		catch(IOException e)
-		{
-			System.out.println("Error reading from BookShell.");
 		}
 	}
 }
