@@ -3,85 +3,116 @@ import java.lang.*;
 import java.util.*;
 
 public class BookShell extends Book implements Serializable 
-{
+{	
 	Scanner keyboard = new Scanner(System.in);
 	private Book newBook;
 	private int currentBooks;
 	private static final int MaxBookShell = 128;
-	public static void main(String[] args)
+
+	public void start()//主程式
 	{
 		Book Bookshell [] = new Book [MaxBookShell];
-		Boolean LoginState = login();
-		menu();
+		System.out.print("Account:");
+		String InputAccount = keyboard.nextLine();
+		System.out.print("Password:");
+		String InputPassword = keyboard.nextLine();
+		Boolean LoginState = login(InputAccount, InputPassword);
+		if(LoginState == true){menu();}
 	}
+
         public void menu()//主選單
         {
-		if(LoginState == true)
-		{
 		System.out.println("Log in success.");
 		System.out.println("Start managing the library.");
 		System.out.println("Please input an operation. If you forgot the operations, please type instruction for detials.");
 		String operation = keyboard.nextLine();
-		try
-		{
-			if(operation.equals("append")){Append();}
-			else if(operation.equals("delete")){Delete();}
-			else if(operation.equals("print")){Print();}
-			else if(operation.equals("search")){Search();}
-			else if(operation.equals("instruction")){Instruction();}
-			else if(operation.equals("exit")){Exit();}
-			else throw new NotAnOperationException();
-		}
-		catch(NotAnOperationException e)
+		if(operation.equals("append")){Append();}
+		else if(operation.equals("delete")){Delete();}
+		else if(operation.equals("print")){Print();}
+		else if(operation.equals("search")){Search();}
+		else if(operation.equals("change")){Correct();}
+		else if(operation.equals("instruction")){Instruction();}
+		else if(operation.equals("exit")){Exit();}
+		else 
 		{
 			System.out.println("Not an operation or incorrect typing.");
 			menu();
 		}
-		System.out.println("Library managing process is ended.");
-		System.out.println("Thank you for using.");
-		System.exit(0);
-        }
-	
+	}
+
 	public void Append() //新增一筆資料 
 	{ 
-		System.out.println("Please enter the book name.");
-		String InputBookName = keyboard.nextLine();
-		System.out.println("Please enter the author name.");
-		String InputAuthor = keyboard.nextLine();
-		System.out.println("Please enter the publisher's name.");
-		String InputPublisher = keyboard.nextLine();
-		System.out.println("Please enter the book code.");
-		String InputCode = keyboard.nextLine();
-		System.out.println("Please enter the genre of the book.");
-		String InputGenre = keyboard.nextLine();
-		System.out.println("Please enter the year of publishing.");
-		String InputYear = keyboard.nextLine();
-		BookShell [currentBooks] = new book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
-		currentBooks++; //現存書籍數量+1
+		if(currentBooks == MaxBookShell){System.out.println("The bookshell is full.");}
+		else
+		{
+			System.out.println("Please enter the book name.");
+			String InputBookName = keyboard.nextLine();
+			System.out.println("Please enter the author name.");
+			String InputAuthor = keyboard.nextLine();
+			System.out.println("Please enter the publisher's name.");
+			String InputPublisher = keyboard.nextLine();
+			System.out.println("Please enter the book code.");
+			String InputCode = keyboard.nextLine();
+			System.out.println("Please enter the genre of the book.");
+			String InputGenre = keyboard.nextLine();
+			System.out.println("Please enter the year of publishing.");
+			String InputYear = keyboard.nextLine();
+			BookShell [currentBooks] = new book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+			currentBooks++; //現存書籍數量+1
+		}
 		menu();
 	}
-	public void Delete()//刪除一筆資料
+
+	public void Correct() //修改一筆資料 
 	{
-		--currentBooks;
-		System.out.println("Please enter the book code to be deleted.");
-		String codeToBeDeleted = keyboard.nextLine();
-		for((int i = 0;i < currentBooks();i++)
+		System.out.println("Please enter the book code youwant to correct.");
+		String codeToCorrect = keyboard.nextLine();
+		for(int i = 0;i < getCurrentBooks();i++)
 		{
-			if(codeToBeDeleted.equals(BookShell [i].getCode()))
+			if(codeToCorrect.equals(BookShell [i].getCode()))
 			{
-				BookShell [i] = new Book (BookShell [currentBooks]);
-				BookShell [currentBooks] = new Book();
+				System.out.println("Please enter the book name.");
+				String InputBookName = keyboard.nextLine();
+				System.out.println("Please enter the author name.");
+				String InputAuthor = keyboard.nextLine();
+				System.out.println("Please enter the publisher's name.");
+				String InputPublisher = keyboard.nextLine();
+				System.out.println("Please enter the book code.");
+				String InputCode = keyboard.nextLine();
+				System.out.println("Please enter the genre of the book.");
+				String InputGenre = keyboard.nextLine();
+				System.out.println("Please enter the year of publishing.");
+				String InputYear = keyboard.nextLine();
+				BookShell [i] = new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
 			}
 		}
-		
+		menu();
+	}
+	public void Delete() //刪除一筆資料
+	{
+		if(currentBooks == 0){System.out.println("The bookshell is empty.");}
+		else
+		{
+			--currentBooks;
+			System.out.println("Please enter the book code to be deleted.");
+			String codeToBeDeleted = keyboard.nextLine();
+			for(int i = 0;i < getCurrentBooks();i++)
+			{
+				if(codeToBeDeleted.equals(BookShell [i].getCode()))
+				{
+					BookShell [i] = new Book (BookShell [currentBooks]);
+					BookShell [currentBooks] = new Book();
+				}
+			}
+		}
 		menu();
 		
 	}
-	public void Search()
+	public void Search()//搜尋一筆資料
 	{
 		System.out.println("Please enter the book code you're looking for.");
 		String codeToSearch = keyboard.nextLine();
-		for((int i = 0;i < currentBooks();i++)
+		for(int i = 0;i < getCurrentBooks();i++)
 		{
 			if(codeToSearch.equals(BookShell [i].getCode()))
 			{
@@ -96,30 +127,53 @@ public class BookShell extends Book implements Serializable
 	{
 		for(int i = 0;i < currentBooks;i++)
 		{
-			System.out.printf(BookShell [i].toString());
+			System.out.println(BookShell [i].toString());
 		}
 		menu();
 	}
 	public void Instruction()  //查詢指令表
 	{
-		System.out.println("-append: append a book into the shell.");
-		System.out.println("-delete: delete a book from the shell.");
-		System.out.println(" -print: print all the books in the shell.");
-		System.out.println("-search: search a book in the shell with the code.");
+		System.out.println(" -append: append a book into the shell.");
+		System.out.println(" -delete: delete a book from the shell.");
+		System.out.println("  -print: print all the books in the shell.");
+		System.out.println(" -search: search a book in the shell with the code.");
+		System.out.println("-correct: change the status on a book in the shell.");
+		System.out.println("   -exit: end the program and save the status into a ext file.");
 		menu();
 	}
-        public Boolean login() //確定登入資料 + 創建物件
+        public Boolean login(String Line1, String Line2) //確定登入資料
         {
 		String Account = "cis";
 		String Password = "1234";
-		System.out.print("Account:")
-		String InputAccount = keyboard.nextLine();
-		System.out.print("Password:")
-		String InputPassword = keyboard.nextLine();
-		return (InputAccount.equals(Account)&&InputPassword.equals(Password));
+		return (Line1.equals(Account)&&Line2.equals(Password));
         }
 	public int getCurrentBooks()
 	{
 		return currentBooks;
+	}
+	public void Exit()  //結束動作
+	{
+		try
+		{
+			System.out.print("Books writing into the file.");
+			PrintWriter outputStream = new PrintWriter(new FileOutPutStream("BookShell.txt"));
+			for(int i = 0;i < currentBooks;i++)
+			{
+				outputStream.println(BookShell [i].toString());
+			}
+			outputStream.close();
+			System.out.print("Books are wrote into the file.");
+			System.out.print("The library is managed.");
+			System.out.print("Thanks for using.");
+		}
+		catch(FileNotFoundException e)
+		{
+			System.out.println("File not found.");
+			File file = new File("BookShell.txt");
+		}
+		catch(IOException e)
+		{
+			System.out.println("Error reading from BookShell.");
+		}
 	}
 }
