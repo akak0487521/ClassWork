@@ -7,16 +7,17 @@ public class BookShell extends Book
 	Scanner keyboard = new Scanner(System.in);
 	private int currentBooks = 0;
 	private static final int MaxBookShell = 128;
-	private Book [] BookShellCreated;
-	private BookShell BookShellInUse = new BookShell();
+	Book [] BookShellCreated = new Book [MaxBookShell];
+	BookShell BookShellInUse = new BookShell();
 
 	public BookShell()
 	{
-		BookShellCreated = new Book [MaxBookShell];
+		Book [] BookShellInUse = new Book [MaxBookShell];
 		for(int j = 0;j < MaxBookShell;j++)
 		{
-			BookShellCreated [j] = new Book();
+			BookShellInUse [j] = new Book();
 		}
+		BookShellCreated = BookShellInUse;
 		currentBooks = 0;
 	}
 
