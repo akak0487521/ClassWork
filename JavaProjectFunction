@@ -2,41 +2,175 @@ import java.io *;
 import java.lang.*;
 import java.util.*;
 
-public class LibraryManagement
+public class BookShellRemake
 {
 	public static void main(String[] args)
 	{
 		Scanner input = new Scanner(System.in);
+		static final int MaxBookShell = 128;
+		Book [] BookShellCreated = new Book [MaxBookShell];
+		for(int j = 0;j < MaxBookShell;j++)
+		{
+			BookShellCreated [j] = new Book();
+		}
+		currentBooks = 0;
+		System.out.print("Account:");
+		String InputAccount = keyboard.nextLine();
+		System.out.print("Password:");
+		String InputPassword = keyboard.nextLine();
+		Boolean LoginState = login(InputAccount, InputPassword);
+		if(LoginState == true){menu();}
+	}
+	
+        public void menu()//主選單
+        {
+		System.out.println("Log in success.");
+		System.out.println("Start managing the library.");
+		System.out.println("Please input an operation. If you forgot the operations, please type instruction for detials.");
+		String operation = keyboard.nextLine();
+		if(operation.equals("append")){Append(BookShellInUse.BookShellCreated[BookShellInUse.getCurrentBooks()]);}
+		else if(operation.equals("delete")){Delete();}
+		else if(operation.equals("print")){Print();}
+		else if(operation.equals("search")){Search();}
+		else if(operation.equals("change")){Correct();}
+		else if(operation.equals("instruction")){Instruction();}
+		else if(operation.equals("exit")){Exit();}
+		else 
+		{
+			System.out.println("Not an operation or incorrect typing.");
+			menu();
+		}
+	}
+	
+	public void Append(Book  bookToPut) //新增一筆資料 
+	{ 
+		if(currentBooks == MaxBookShell){System.out.println("The bookshell is full.");}
+		else
+		{
+			System.out.println("Please enter the book name.");
+			String InputBookName = keyboard.nextLine();
+			System.out.println("Please enter the author name.");
+			String InputAuthor = keyboard.nextLine();
+			System.out.println("Please enter the publisher's name.");
+			String InputPublisher = keyboard.nextLine();
+			System.out.println("Please enter the book code.");
+			String InputCode = keyboard.nextLine();
+			System.out.println("Please enter the genre of the book.");
+			String InputGenre = keyboard.nextLine();
+			System.out.println("Please enter the year of publishing.");
+			String InputYear = keyboard.nextLine();
+			bookToPut = new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+			currentBooks++; //現存書籍數量+1
+		}
+		menu();
+	}
+
+	public void Correct() //修改一筆資料 
+	{
+		System.out.println("Please enter the book code youwant to correct.");
+		String codeToCorrect = keyboard.nextLine();
+		for(int i = 0;i < getCurrentBooks();i++)
+		{
+			if(codeToCorrect.equals(BookShellInUse.BookShellCreated[i].getCode()))
+			{
+				System.out.println("Please enter the book name.");
+				String InputBookName = keyboard.nextLine();
+				System.out.println("Please enter the author name.");
+				String InputAuthor = keyboard.nextLine();
+				System.out.println("Please enter the publisher's name.");
+				String InputPublisher = keyboard.nextLine();
+				System.out.println("Please enter the book code.");
+				String InputCode = keyboard.nextLine();
+				System.out.println("Please enter the genre of the book.");
+				String InputGenre = keyboard.nextLine();
+				System.out.println("Please enter the year of publishing.");
+				String InputYear = keyboard.nextLine();
+				BookShellInUse.BookShellCreated[i]= new Book(InputBookName, InputAuthor, InputPublisher, InputCode, InputGenre, InputYear);
+			}
+		}
+		menu();
+	}
+	
+	public void Delete() //刪除一筆資料
+	{
+		if(currentBooks == 0){System.out.println("The bookshell is empty.");}
+		else
+		{
+			System.out.println("Please enter the book code to be deleted.");
+			String codeToBeDeleted = keyboard.nextLine();
+			for(int i = 0;i < getCurrentBooks();i++)
+			{
+				if(codeToBeDeleted.equals(BookShellInUse.BookShellCreated[i].getCode()))
+				{
+					--currentBooks;
+					BookShellInUse.BookShellCreated[i] = new Book (BookShellInUse.BookShellCreated[currentBooks]);
+					BookShellInUse.BookShellCreated[currentBooks] = new Book();
+				}
+			}
+		}
+		menu();
+	}
+	
+	public void Search()//搜尋一筆資料
+	{
+		System.out.println("Please enter the book code you're looking for.");
+		String codeToSearch = keyboard.nextLine();
+		for(int i = 0;i < getCurrentBooks();i++)
+		{
+			if(codeToSearch.equals(BookShellInUse.BookShellCreated[i].getCode()))
+			{
+				System.out.println(BookShellInUse.BookShellCreated[i].toString());
+			}
+		}
+		menu();
+	}
+	
+	ublic void Print()//輸出全部書籍
+	{
+		for(int i = 0;i < currentBooks;i++)
+		{
+			System.out.println(BookShellInUse.BookShellCreated[i].toString());
+		}
+		menu();
+	}
+	
+	public void Instruction()  //查詢指令表
+	{
+		System.out.println(" -append: append a book into the shell.");
+		System.out.println(" -delete: delete a book from the shell.");
+		System.out.println("  -print: print all the books in the shell.");
+		System.out.println(" -search: search a book in the shell with the code.");
+		System.out.println("-correct: change the status on a book in the shell.");
+		System.out.println("   -exit: end the program and save the status into a ext file.");
+		menu();
+	}
+	
+	 public Boolean login(String Line1, String Line2) //確定登入資料
+        {
+		String Account = "cis";
+		String Password = "1234";
+		return (Line1.equals(Account)&&Line2.equals(Password));
+        }
+	
+	public void Exit()  //結束動作
+	{
 		try
 		{
-			FileReader Library = new FileReader("Library.txt");
-		}	
-		catch (FileNotFoundException e) 
-		{
-  	   	       System.out.println("FileNotFound");
-     		       System.exit(0)
+			System.out.print("Books writing into the file.");
+			PrintWriter outputStream = new PrintWriter(new FileOutputStream("BookShell.txt"));
+			for(int i = 0;i < currentBooks;i++)
+			{
+				outputStream.println(BookShellInUse.BookShellCreated[i].toString());
+			}
+			outputStream.close();
+			System.out.print("Books are wrote into the file.");
+			System.out.print("The library is managed.");
+			System.out.print("Thanks for using.");
 		}
-		String Account = input.nextLine();
-		String Password = input.nextLine();
-		try
+		catch(FileNotFoundException e)
 		{
-			if(Account.equals("cis") == false)
-				{throw new Exception("Not correct account");}
-			else if((Password.equals("1234") == false))
-				{throw new Exception("Not correct password");}
+			System.out.println("File not found.");
+			File file = new File("BookShell.txt");
 		}
-		catch(Exception e)
-		{
-		String ErrorMessage = e.getMessage();
-		System.out.println(ErrorMessage);
-		System.exit(0);
-		}
-		System.out.println("Log in success.")
-		System.out.println("Start managing the library.")
-		System.out.println("Please input an operation.")
-		try
-		{
-		
-		
-		
-		
+	}
+}
