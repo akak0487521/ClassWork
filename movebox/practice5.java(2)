@@ -1,11 +1,11 @@
 //------------------------------------------------------
-//½d¨Òµ{¦¡5¡G§Q¥ÎÁä½L¨Ó±±¨î¨¤¦â²¾°Ê
-//¥»µ{¦¡¥HÅªÀÉ¤è¦¡¸ü¤J¦a¹Ï¡A¦a¹ÏÀÉ¦WºÙ¡Fmap1.txt
-//¹w³]¦a¹Ï¤j¤p¬°10*5¡A¨Ï¥ÎªÌ¥i¥H¦Û¦æ©w¸q
-//°}¦C­È»¡©ú : 0=Àğ¾À ; 1=¹D¸ô ; 2:²×ÂI
-//µ{¦¡¤¤¤w¹ê§@¤W¤U«ö¶sªºµ{¦¡½X
-//µ{¦¡¤¤¨Ï¥ÎJudge()¨Ó§PÂ_¬O§_¸I¼²¡A¤w¹ê§@§PÂ_¬O§_¸I¨ìÀğ¾À
-//µ{¦¡¤¤¤w¹ê§@Áä½L¤W¤U²¾°Êªºµ{¦¡½X
+//ç¯„ä¾‹ç¨‹å¼5ï¼šåˆ©ç”¨éµç›¤ä¾†æ§åˆ¶è§’è‰²ç§»å‹•
+//æœ¬ç¨‹å¼ä»¥è®€æª”æ–¹å¼è¼‰å…¥åœ°åœ–ï¼Œåœ°åœ–æª”åç¨±ï¼›map1.txt
+//é è¨­åœ°åœ–å¤§å°ç‚º10*5ï¼Œä½¿ç”¨è€…å¯ä»¥è‡ªè¡Œå®šç¾©
+//é™£åˆ—å€¼èªªæ˜ : 0=ç‰†å£ ; 1=é“è·¯ ; 2:çµ‚é»
+//ç¨‹å¼ä¸­å·²å¯¦ä½œä¸Šä¸‹æŒ‰éˆ•çš„ç¨‹å¼ç¢¼
+//ç¨‹å¼ä¸­ä½¿ç”¨Judge()ä¾†åˆ¤æ–·æ˜¯å¦ç¢°æ’ï¼Œå·²å¯¦ä½œåˆ¤æ–·æ˜¯å¦ç¢°åˆ°ç‰†å£
+//ç¨‹å¼ä¸­å·²å¯¦ä½œéµç›¤ä¸Šä¸‹ç§»å‹•çš„ç¨‹å¼ç¢¼
 //------------------------------------------------------
 
 import java.awt.event.ActionEvent;
@@ -101,7 +101,7 @@ public class practice5 extends JFrame {
 		boxLabel.setIcon(Box_icon);
 		getContentPane().getFocusListeners();
 		
-		map=readMap("map"+mapNumber+".txt");//«Å§i¤@­Ó¤Gºû°}¦Cmap¨Ó¦s¨úreadMap¦^¶Çªº¤Gºû°}¦C­È
+		map=readMap("map"+mapNumber+".txt");//å®£å‘Šä¸€å€‹äºŒç¶­é™£åˆ—mapä¾†å­˜å–readMapå›å‚³çš„äºŒç¶­é™£åˆ—å€¼
 		mapNumber++;
 		boolean box=false;
 		for (int i=0; i<5; i++ )
@@ -194,15 +194,15 @@ public class practice5 extends JFrame {
 	}
 	private int[][] readMap(String mapfile) throws FileNotFoundException {
 		
-		File f = new File(mapfile);			//«Å§i¤@­ÓFile¨ÓÅª¨ú¦a¹ÏÀÉ
-		int[][] map=new int[5][10];			//«Å§i¤@­Ó¤G¬°°}¦C¦s¨ú±q¦a¹ÏÀÉÅªªñ¨Óªº­È
-		Scanner sc = new Scanner(f);		//§Q¥ÎScanner¨ÓÅª¨ú¦a¹ÏÀÉªº­È
-			for(int i=0;i<5;i++){			//«Å§i¤@­Ó±_ª¬¦^°é¨ÓÅª¨ú¦a¹ÏÀÉ
+		File f = new File(mapfile);			//å®£å‘Šä¸€å€‹Fileä¾†è®€å–åœ°åœ–æª”
+		int[][] map=new int[5][10];			//å®£å‘Šä¸€å€‹äºŒç‚ºé™£åˆ—å­˜å–å¾åœ°åœ–æª”è®€è¿‘ä¾†çš„å€¼
+		Scanner sc = new Scanner(f);		//åˆ©ç”¨Scannerä¾†è®€å–åœ°åœ–æª”çš„å€¼
+			for(int i=0;i<5;i++){			//å®£å‘Šä¸€å€‹å·¢ç‹€å›åœˆä¾†è®€å–åœ°åœ–æª”
 				for(int j=0;j<10;j++){
-					map[i][j]=sc.nextInt();	//±N±q¦a¹ÏÀÉÅª¨ú¨ìªº­È©ñ¤J°}¦C
+					map[i][j]=sc.nextInt();	//å°‡å¾åœ°åœ–æª”è®€å–åˆ°çš„å€¼æ”¾å…¥é™£åˆ—
 				}
 			}
-		return map; 						//¦^¶ÇÅª¨ú¨ìªº¤Gºû°}¦C­È
+		return map; 						//å›å‚³è®€å–åˆ°çš„äºŒç¶­é™£åˆ—å€¼
 	}
 	
 	private class UpButtonActionListener implements ActionListener {
@@ -240,14 +240,14 @@ public class practice5 extends JFrame {
 	}
 
 	protected void upButton_actionPerformed(ActionEvent e) {
-		if(current_y>0){					//§PÂ_current_y¬O§_¶W¹L¦a¹Ï½d³ò
-			current_y--;					//¨ú±o²¾°Ê¨¤¦â¤W¤èªº­È
-			if (judge()){					//§Q¥Îjudge()¨Ó§PÂ_¦a¹Ï¬O§_¯à¦æ¨«
-			   int x= actor.getX();			//¨ú±o²¾°Ê¨¤¦â¥Ø«eªºX®y¼Ğ
-			   int y= actor.getY();			//¨ú±o²¾°Ê¨¤¦â¥Ø«eªºY®y¼Ğ
-			   actor.setLocation(x, y-40);	//²¾°Ê¨¤¦âªºy®y¼Ğ¦V¤W²¾°Ê40
+		if(current_y>0){					//åˆ¤æ–·current_yæ˜¯å¦è¶…éåœ°åœ–ç¯„åœ
+			current_y--;					//å–å¾—ç§»å‹•è§’è‰²ä¸Šæ–¹çš„å€¼
+			if (judge()){					//åˆ©ç”¨judge()ä¾†åˆ¤æ–·åœ°åœ–æ˜¯å¦èƒ½è¡Œèµ°
+			   int x= actor.getX();			//å–å¾—ç§»å‹•è§’è‰²ç›®å‰çš„Xåº§æ¨™
+			   int y= actor.getY();			//å–å¾—ç§»å‹•è§’è‰²ç›®å‰çš„Yåº§æ¨™
+			   actor.setLocation(x, y-40);	//ç§»å‹•è§’è‰²çš„yåº§æ¨™å‘ä¸Šç§»å‹•40
 			}
-			else current_y++;				//­Yjudge()§PÂ_¦a¹Ï¤£¯à¦æ¨«¡AÁÙ­ìcurrent_y
+			else current_y++;				//è‹¥judge()åˆ¤æ–·åœ°åœ–ä¸èƒ½è¡Œèµ°ï¼Œé‚„åŸcurrent_y
 		}
 		getContentPane().requestFocus();
 	}
@@ -399,10 +399,10 @@ public class practice5 extends JFrame {
 			warrior.setVisible(false);
 			result=true;
 		}
-		else if (map[current_y][current_x]==0)		//­Y¥Ø«e¦ì¸mªºmap­È¬°0=road
+		else if (map[current_y][current_x]==0)		//è‹¥ç›®å‰ä½ç½®çš„mapå€¼ç‚º0=road
 		 {
 			result = true;
-		}		//¦^¶Ç¥i¥H²¾°Ê
+		}		//å›å‚³å¯ä»¥ç§»å‹•
 		else if(map[current_y][current_x]==2)
 		{
 			actor.setLocation(current_x*40,current_y*40);
@@ -491,15 +491,15 @@ public class practice5 extends JFrame {
 		if(keyCode==38||keyCode==87)
 		{
 			if(current_y>0)
-			{					//§PÂ_current_y¬O§_¶W¹L¦a¹Ï½d³ò
-				current_y--;					//¨ú±o²¾°Ê¨¤¦â¤W¤èªº­È
+			{					//åˆ¤æ–·current_yæ˜¯å¦è¶…éåœ°åœ–ç¯„åœ
+				current_y--;					//å–å¾—ç§»å‹•è§’è‰²ä¸Šæ–¹çš„å€¼
 				if (judge())
-				{					//§Q¥Îjudge()¨Ó§PÂ_¦a¹Ï¬O§_¯à¦æ¨«
-				   int x= actor.getX();			//¨ú±o²¾°Ê¨¤¦â¥Ø«eªºX®y¼Ğ
-				   int y= actor.getY();			//¨ú±o²¾°Ê¨¤¦â¥Ø«eªºY®y¼Ğ
-				   actor.setLocation(x, y-40);	//²¾°Ê¨¤¦âªºy®y¼Ğ¦V¤W²¾°Ê40
+				{					//åˆ©ç”¨judge()ä¾†åˆ¤æ–·åœ°åœ–æ˜¯å¦èƒ½è¡Œèµ°
+				   int x= actor.getX();			//å–å¾—ç§»å‹•è§’è‰²ç›®å‰çš„Xåº§æ¨™
+				   int y= actor.getY();			//å–å¾—ç§»å‹•è§’è‰²ç›®å‰çš„Yåº§æ¨™
+				   actor.setLocation(x, y-40);	//ç§»å‹•è§’è‰²çš„yåº§æ¨™å‘ä¸Šç§»å‹•40
 				}
-				else current_y++;				//­Yjudge()§PÂ_¦a¹Ï¤£¯à¦æ¨«¡AÁÙ­ìcurrent_y
+				else current_y++;				//è‹¥judge()åˆ¤æ–·åœ°åœ–ä¸èƒ½è¡Œèµ°ï¼Œé‚„åŸcurrent_y
 			}
 		}
 		else if(keyCode==40||keyCode==83)
