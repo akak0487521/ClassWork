@@ -47,29 +47,29 @@ for ( $i = 1; $i <= 8; $i++ ) {
    }
    print "</tr>";
 }
-print $station[++$_POST["start"]] . "到" . $station[++$_POST["end"]] . "的" . $ticket[$_POST["price"]] . "價是" . abs(($_POST["start"] - $_POST["end"])) * 10 * (++$_POST["price"]); 
+print $station[$_POST["start"]] . "到" . $station[$_POST["end"]] . "的" . $ticket[$_POST["price"]] . "價是" . abs(($_POST["start"] - $_POST["end"])) * 10 * (++$_POST["price"]); 
 ?>
 </table>
 <form action="Ch5_4.php" method="post">
 起站：  <select name="start">
-　			<option value="0">基隆</option>
-　			<option value="1">八堵</option>
-　			<option value="2">七堵</option>
-　			<option value="3">五堵</option>
-　			<option value="4">汐止</option>
-　			<option value="5">南港</option>
-　			<option value="6">松山</option>
-　			<option value="7">台北</option>
+　			<option value="1">基隆</option>
+　			<option value="2">八堵</option>
+　			<option value="3">七堵</option>
+　			<option value="4">五堵</option>
+　			<option value="5">汐止</option>
+　			<option value="6">南港</option>
+　			<option value="7">松山</option>
+　			<option value="8">台北</option>
 		</select><br>
 訖站：	<select name="end">
-　			<option value="0">基隆</option>
-　			<option value="1">八堵</option>
-　			<option value="2">七堵</option>
-　			<option value="3">五堵</option>
-　			<option value="4">汐止</option>
-　			<option value="5">南港</option>
-　			<option value="6">松山</option>
-　			<option value="7">台北</option>
+　			<option value="1">基隆</option>
+　			<option value="2">八堵</option>
+　			<option value="3">七堵</option>
+　			<option value="4">五堵</option>
+　			<option value="5">汐止</option>
+　			<option value="6">南港</option>
+　			<option value="7">松山</option>
+　			<option value="8">台北</option>
 		</select><br>
 票種：	<select name="price">
 　			<option value="0">優待票</option>
