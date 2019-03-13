@@ -38,6 +38,8 @@ public class practice_145 extends JFrame {
 	private final JButton prev = new JButton();
 	private final JButton next = new JButton();
 	private final JLabel successLabel = new JLabel();
+	private int wx;
+	private int wy;
 	private int mapNumber =1;
 
 	Icon sea_icon = new ImageIcon("./png/sea.png");
@@ -49,11 +51,15 @@ public class practice_145 extends JFrame {
 	Icon ActorRight_icon = new ImageIcon("./png/b40right.png");
 	Icon ActorLeft_icon = new ImageIcon("./png/b40left.png");
 	Icon Box_icon = new ImageIcon("./png/box.png");
+	Icon switch_icon = new ImageIcon("./png/switch.png");
+	Icon warrior_icon = new ImageIcon("./png/warrior.png");
 
 	private int[][] map;
 	int current_x=0, current_y=0;
 	private final JLabel messageLabel = new JLabel();
 	private final JLabel boxLabel = new JLabel();
+	private final JLabel change = new JLabel();
+	private final JLabel warrior = new JLabel();
 	/**
 	 * Launch the application
 	 * @param args
@@ -86,6 +92,12 @@ public class practice_145 extends JFrame {
 		getContentPane().addKeyListener(new ThisContentPaneKeyListener());
 		getContentPane().add(actor);
 		getContentPane().add(boxLabel);
+		getContentPane().add(warrior);
+		getContentPane().add(change);
+		change.setVisible(false);
+		warrior.setVisible(false);
+		change.setIcon(switch_icon);
+		warrior.setIcon(warrior_icon);
 		actor.setIcon(ActorRight_icon);
 		actor.setBounds(0, 0, 40, 40);
 		boxLabel.setIcon(Box_icon);
@@ -119,6 +131,19 @@ public class practice_145 extends JFrame {
 			case 5:
 				tmp.setIcon(road_icon);
 				boxLabel.setBounds(0+j*40, 0+i*40,40,40);
+				break;
+			case 6:
+				change.setBounds(0+j*40, 0+i*40,40,40);
+				wx=j;
+				wy=i;
+				change.setVisible(true);
+				break;
+			case 7:
+				tmp.setIcon(road_icon);
+				wx=j;
+				wy=i;
+				warrior.setBounds(0+j*40, 0+i*40,40,40);
+				warrior.setVisible(true);
 				break;
 			default:
 			    tmp.setIcon(road_icon);
@@ -316,7 +341,13 @@ public class practice_145 extends JFrame {
 		current_y=0;
 		getContentPane().add(actor);
 		getContentPane().add(boxLabel);
+		getContentPane().add(warrior);
+		getContentPane().add(change);
+		change.setVisible(false);
+		warrior.setVisible(false);
+		warrior.setIcon(warrior_icon);
 		actor.setIcon(ActorRight_icon);
+		change.setIcon(switch_icon);
 		actor.setBounds(0, 0, 40, 40);
 		boxLabel.setIcon(Box_icon);
 		try {
@@ -355,6 +386,17 @@ public class practice_145 extends JFrame {
 			case 5:
 				tmp.setIcon(road_icon);
 				boxLabel.setBounds(0+j*40, 0+i*40,40,40);
+				break;
+			case 6:
+				change.setBounds(0+j*40, 0+i*40,40,40);
+				change.setVisible(true);
+				break;
+			case 7:
+				tmp.setIcon(road_icon);
+				wx=j;
+				wy=i;
+				warrior.setBounds(0+j*40, 0+i*40,40,40);
+				warrior.setVisible(true);
 				break;
 			default:
 			    tmp.setIcon(road_icon);
@@ -423,7 +465,13 @@ public class practice_145 extends JFrame {
 		current_y=0;
 		getContentPane().add(actor);
 		getContentPane().add(boxLabel);
+		getContentPane().add(warrior);
+		getContentPane().add(change);
+		change.setVisible(false);
+		warrior.setVisible(false);
+		warrior.setIcon(warrior_icon);
 		actor.setIcon(ActorRight_icon);
+		change.setIcon(switch_icon);
 		actor.setBounds(0, 0, 40, 40);
 		boxLabel.setIcon(Box_icon);
 		try {
@@ -530,7 +578,13 @@ public class practice_145 extends JFrame {
 		current_y=0;
 		getContentPane().add(actor);
 		getContentPane().add(boxLabel);
+		getContentPane().add(warrior);
+		getContentPane().add(change);
+		change.setVisible(false);
+		warrior.setVisible(false);
+		warrior.setIcon(warrior_icon);
 		actor.setIcon(ActorRight_icon);
+		change.setIcon(switch_icon);
 		actor.setBounds(0, 0, 40, 40);
 		boxLabel.setIcon(Box_icon);
 		try {
@@ -569,6 +623,17 @@ public class practice_145 extends JFrame {
 			case 5:
 				tmp.setIcon(road_icon);
 				boxLabel.setBounds(0+j*40, 0+i*40,40,40);
+				break;
+			case 6:
+				change.setBounds(0+j*40, 0+i*40,40,40);
+				change.setVisible(true);
+				break;
+			case 7:
+				tmp.setIcon(road_icon);
+				wx=j;
+				wy=i;
+				warrior.setBounds(0+j*40, 0+i*40,40,40);
+				warrior.setVisible(true);
 				break;
 			default:
 			    tmp.setIcon(road_icon);
@@ -632,7 +697,13 @@ public class practice_145 extends JFrame {
 	protected boolean judge() {
 		boolean result = false;
 		//0:road ; 1:wall ; 2:goal
-		if (map[current_y][current_x]==0)		//若目前位置的map值為0=road
+		if(map[current_y][current_x]==6)
+		{
+			map[wy][wx]=0;
+			warrior.setVisible(false);
+			result=true;
+		}
+		else if (map[current_y][current_x]==0)		//若目前位置的map值為0=road
 		 {
 			result = true;
 		}		//回傳可以移動
