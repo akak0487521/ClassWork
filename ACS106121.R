@@ -22,5 +22,5 @@ myfun <- function()
   cat(c("    學期","  修習學分","    實得學分","    平均","    加權平均","    不及格科目"), seperate = " ")
   cat("\n-------------------------------------------------------------------------------\n")
   d_ply(df, .variables = "Semester", .fun = myfun2)
-  passes <- df[which(df$Score < 60)]
+  passes <- df[which(df$Score >= 60),]
 }  
