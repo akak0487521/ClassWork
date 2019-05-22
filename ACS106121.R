@@ -1,16 +1,17 @@
 myfun1 <- function(x)
 {
   total <- c(sum(x$Credit[which(x$Score >= 60)]), mean(x$Score),  sum((x$Score * x$Credit) / sum(x$Credit)))
-  cat(sprintf("Á`¾Ç¤À: %.1f    ¥­§¡: %.2f    ¥[Åv¥­§¡: %.2f\n", total[1],total[2],total[3]))
+  cat(sprintf("ç¸½å­¸åˆ†: %.1f    å¹³å‡: %.2f    åŠ æ¬Šå¹³å‡: %.2f\n", total[1],total[2],total[3]))
 }
 myfun2 <- function(x)
 {
+  sem <- unique(x$Semester)
   credit2 <- sum(x$Credit)
   realCredit <- sum(x$Credit[which(x$Score >= 60)])
   mean2 <- mean(x$Score)
   Wmean <- sum((x$Score * x$Credit) / sum(x$Credit))
   failes <- paste(x$Course[which(x$Score < 60)], collapse = " ")
-  cat(sprintf("           %.1f        %.1f     %.2f      %.2f     %s \n",credit2,realCredit,mean2,Wmean,failes))
+  cat(sprintf("%8s   %.1f        %.1f     %.2f      %.2f     %s \n",sem,credit2,realCredit,mean2,Wmean,failes))
 }
 
 myfun <- function()
@@ -18,7 +19,8 @@ myfun <- function()
   
   df <- data.frame(read.table(file = "~/transcript.csv", sep = ",",header = TRUE))
   myfun1(df)
-  cat(c("    ¾Ç´Á","  ­×²ß¾Ç¤À","    ¹ê±o¾Ç¤À","    ¥­§¡","    ¥[Åv¥­§¡","    ¤£¤Î®æ¬ì¥Ø"), seperate = " ")
+  cat(c("    å­¸æœŸ","  ä¿®ç¿’å­¸åˆ†","    å¯¦å¾—å­¸åˆ†","    å¹³å‡","    åŠ æ¬Šå¹³å‡","    ä¸åŠæ ¼ç§‘ç›®"), seperate = " ")
   cat("\n-------------------------------------------------------------------------------\n")
   d_ply(df, .variables = "Semester", .fun = myfun2)
+  passes <- df[which(df$Score < 60)]
 }  
