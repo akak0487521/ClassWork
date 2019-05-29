@@ -3,6 +3,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.net.Socket;
+import java.net.ServerSocket;
 
 import java.awt.Image;
 import java.awt.RenderingHints;
@@ -127,7 +128,7 @@ public class GUI extends JFrame {
 		game_gui.setLayout(new BorderLayout(0, 0));
 		
 		/*
-		*  popmenu ªZ¾¹¦C
+		*  popmenu æ­¦å™¨åˆ—
 		*/
 		weapon_bar = new JPopupMenu();
 		
@@ -138,22 +139,22 @@ public class GUI extends JFrame {
 		weapon_bar.add(weapon2);
 		
 		/*
-		*  ª±®a®æ»P¹ï¤â®æ
+		*  ç©å®¶æ ¼èˆ‡å°æ‰‹æ ¼
 		*/
 		game_set_area = new JPanel();
 		/*
-		*  ©³³¡µe­±Åã¥Ü»P³]©w
+		*  åº•éƒ¨ç•«é¢é¡¯ç¤ºèˆ‡è¨­å®š
 		*/
 		game_botton_area = new JPanel();
 		FlowLayout fl_game_botton_area = (FlowLayout) game_botton_area.getLayout();
 		fl_game_botton_area.setHgap(50);
 		
-		player1 = getLabel("player1",true,Color.BLUE,Color.WHITE,new Font("·s²Ó©úÅé", Font.BOLD, 20));
-		player1_own = getLabel("\u9084\u5269\u9918:",true,Color.BLACK,Color.WHITE,new Font("·s²Ó©úÅé", Font.BOLD, 20));
+		player1 = getLabel("player1",true,Color.BLUE,Color.WHITE,new Font("æ–°ç´°æ˜é«”", Font.BOLD, 20));
+		player1_own = getLabel("\u9084\u5269\u9918:",true,Color.BLACK,Color.WHITE,new Font("æ–°ç´°æ˜é«”", Font.BOLD, 20));
 		check_button = getMenuButton("\u78BA\u8A8D",false,false,true);
 		exit_game_button = getMenuButton("\u4E2D\u96E2",false,false,true);
-		player2_own = getLabel("\u9084\u5269\u9918:",true,Color.BLACK,Color.WHITE,new Font("·s²Ó©úÅé", Font.BOLD, 20));
-		player2 = getLabel("player2",true,Color.RED,Color.WHITE,new Font("·s²Ó©úÅé", Font.BOLD, 20));
+		player2_own = getLabel("\u9084\u5269\u9918:",true,Color.BLACK,Color.WHITE,new Font("æ–°ç´°æ˜é«”", Font.BOLD, 20));
+		player2 = getLabel("player2",true,Color.RED,Color.WHITE,new Font("æ–°ç´°æ˜é«”", Font.BOLD, 20));
 		
 		game_botton_area.add(player1);
 		game_botton_area.add(player1_own);
@@ -280,33 +281,47 @@ public class GUI extends JFrame {
 	((CardLayout)view_swicther.getLayout()).show(view_swicther,"menu");
 	}
 	/*
-	*	actionPerformed for button Âà´«­¶­±
+	*	actionPerformed for button è½‰æ›é é¢
 	*/
 	public void actionPerformed(ActionEvent event) {
 		Object pulse = event.getSource();
 		if(pulse == create_button ||pulse == check_button) {
             ((CardLayout)view_swicther.getLayout()).show(view_swicther,"game");
 			isServer = true;
-			m_serverSocket = new ServerSocket(port);
-			s_socket = m_serverSocket.accept();
-			m_serverSocket.close();
-            game_gui.repaint();	//µ¥«İ¹ï¤â·j´M
+			try{
+				m_serverSocket = new ServerSocket(port);
+				s_socket = m_serverSocket.accept();
+				m_serverSocket.close();
+			}
+			catch (IOException e)
+      			{
+        		System.out.println(e.getMessage());//å‡ºç¾ä¾‹å¤–æ™‚ï¼Œæ•æ‰ä¸¦é¡¯ç¤ºä¾‹å¤–è¨Šæ¯(é€£ç·šæˆåŠŸä¸æœƒå‡ºç¾ä¾‹å¤–)
+        		}
+            game_gui.repaint();	//ç­‰å¾…å°æ‰‹æœå°‹
 		} else if(pulse == ip_check_button1) {
 			boolean isOk = false;
-			String user_ip = textField.getText();  //Àò¨úip
+			String user_ip = textField.getText();  //ç²å–ip
 			/*
-			* ®æ¦¡½T»{
+			* æ ¼å¼ç¢ºèª
 			*/
 			IP_confirm ipcon = new IP_confirm();
 			ipcon.set_ip_content(user_ip);
 			isOk=ipcon.ip_format();
-			//if ip check ok?isOk=true:showMessageDialog("¤£¦XªkªºIP");
+			//if ip check ok?isOk=true:showMessageDialog("ä¸åˆæ³•çš„IP");
 			if(isOk) {
-				c_socket = new Socket(user_ip, port);
+				 try
+  				 {
+        			 m_socket = new Socket(ip, port);//å»ºç«‹é€£ç·šã€‚(ipç‚ºä¼ºæœå™¨ç«¯çš„ipï¼Œportç‚ºä¼ºæœå™¨ç«¯é–‹å•Ÿçš„port)
+     				 }
+     				 catch (IOException e)
+      			 	 {
+        		  	 System.out.println(e.getMessage());
+      			 	 }
+				
 				((CardLayout)view_swicther.getLayout()).show(view_swicther,"game");
-				game_gui.repaint();	//µ¥¤§«áip½T»{¿é¤J
+				game_gui.repaint();	//ç­‰ä¹‹å¾Œipç¢ºèªè¼¸å…¥
 			} else {
-				JOptionPane.showMessageDialog(null, "¿ù»~®æ¦¡ªºip", "¿ù»~Åã¥Ü",JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "éŒ¯èª¤æ ¼å¼çš„ip", "éŒ¯èª¤é¡¯ç¤º",JOptionPane.ERROR_MESSAGE);
 			}
 		} else if(pulse == search_button) {
             ((CardLayout)view_swicther.getLayout()).show(view_swicther,"ip");
@@ -382,7 +397,7 @@ public class GUI extends JFrame {
         a.anchor = anc;
 	}
 	/*
-	 * ¹Ï¤ù­«·sÃ¸»sresize
+	 * åœ–ç‰‡é‡æ–°ç¹ªè£½resize
 	 * return Image
 	 */
 	private Image getScaledImage(Image srcImg, int w, int h){
